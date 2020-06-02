@@ -33,8 +33,8 @@ class Solution {
         			maxCount = subString.length();
         	}
         	else {
-        		while(s.charAt(--i) != ch);
-        		subString = "";
+        		subString = subString.substring(subString.indexOf(ch)+1,subString.length());
+        		subString += ch;
         	}
         }
     	return maxCount;
