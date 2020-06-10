@@ -35,8 +35,68 @@ Output: "bb"
 		 */
 		String input = "geeks";
 		System.out.println(longestPalindrome(input));
+		System.out.println(longestPalindromeDP(input));
 		
 		
+		
+	}
+	
+	private static String longestPalindromeDP(String input) {
+		//Using DP
+		int n = input.length();
+		int dp[][] = new int[n][n];
+		String palindrome = input.charAt(0) + "";
+		for(int i=0;i<n;i++)
+			dp[i][i] = 1;
+		for(int i=0;i<n-1;i++) {
+			if(input.charAt(i) == input.charAt(i+1)) {
+				dp[i][i+1] = 1;
+				palindrome = input.substring(i,i+2);
+			}
+		}
+		
+		
+		int currDiff = 2;
+		int totalDiff = n-1;
+		while(currDiff<=totalDiff) {
+			for(int i=0;i<n-currDiff;i++) {
+				System.out.println("String considered - " + input.substring(i,i+currDiff+1));
+				System.out.println("first char - " + input.charAt(i));
+				System.out.println("last char - " + input.charAt(i+currDiff));
+				System.out.println("bichka - " + input.substring(i+1,i+currDiff));
+				System.out.println("uska value in DP " + dp[i+1][i+currDiff-1]);
+				if(input.charAt(i) == input.charAt(i+currDiff)
+						&& dp[i+1][i+currDiff-1] == 1) {
+					System.out.println("Found palindrome " + input.substring(i,i+currDiff+1));
+					dp[i][i + currDiff] = 1;
+					System.out.println("Current palindrome - " + palindrome);
+					String check = input.substring(i,i+currDiff+1);
+					if(check.length() > palindrome.length())
+						palindrome = check;
+					
+						
+				}
+			}
+			currDiff++;
+		}
+			
+		
+		for(int i=0;i<n-2;i++)
+			for(int j=i+2;j<n;j++) {
+				if(input.charAt(i) == input.charAt(j)
+						&& dp[i+1][j-1]==1) {
+					dp[i][j] = 1;
+					if((j-i) > palindrome.length())
+						palindrome = input.substring(i,j+1);
+				}
+			}
+		/*for(int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				System.out.print(dp[i][j] + " ");
+			}
+			System.out.println();
+		}*/
+		return palindrome;
 	}
 	
 	public static String longestPalindrome(String input) {
