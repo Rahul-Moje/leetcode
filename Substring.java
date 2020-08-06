@@ -13,12 +13,12 @@ public class Substring {
 
 		Scanner sc = new Scanner(System.in);
 		String input = sc.nextLine();
-		System.out.println(new Solution().lengthOfLongestSubstring(input));
+		System.out.println(new Solution2().lengthOfLongestSubstring(input));
 
 	}
 
 }
-class Solution {
+class Solution2 {
     public int lengthOfLongestSubstring(String s) {
         int maxCount = 0;
         int currIndex = 0;
